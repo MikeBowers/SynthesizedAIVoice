@@ -21,8 +21,8 @@
 					<section id="main">
 						<header>
 							<span class="avatar"><img src="images/avatar.jpg" alt="" /></span>
-							<h1>Human vs SYNTHETIC</h1>
-							<p>click play icon, then click your guess.</p>
+							<h1 id="humanvssynthetic">Human vs SYNTHETIC</h1>
+							<p id="subtext">click play icon, then click your guess.</p>
 						</header>
 						<!--
 						<hr />
@@ -62,35 +62,58 @@
 						<hr />
 						-->
 
-						<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js">
-						$(document).ready(function(){
-							$("#Next").hide();
-							$("#GuessHuman").hide();
-							$("#GuessSynthetic").hide();
+						<script>
+						//document.getElementById("GuessHuman").style.display = "none";
+						var realvsfakestatusInt = getRndInteger(0,1);
+						var realvsfakestatusString = "";
+						var realvsfakeindexInt = getRndInteger(1,6);
+						var realvsfakeindexString;
+						function play() {
 
-							function play() {
-								var audio = new Audio('https://MikeBowers.Github.io/SynthesizedAIVoice/audio/Fake1.wav');
-								audio.play();
+							if(realvsfakestatusInt == 1)//real = 0 fake = 1
+							{
+								realvsfakestatusString = "Fake";
+							}
+							if(realvsfakestatusInt == 0)//real = 0 fake = 1
+							{
+								realvsfakestatusString = "Real";
+							}
+							realvsfakeindexString = realvsfakeindexInt.toString();
 
-								$("#GuessHuman").show();
-								$("#GuessSynthetic").show();
-							};
+							var resource = "https://MikeBowers.Github.io/SynthesizedAIVoice/audio/"+realvsfakestatusString+realvsfakeindexString+".wav"
+							var audio = new Audio(resource);
+							audio.play();
+							document.getElementById("GuessHuman").style.display = "inline";
+							document.getElementById("GuessSynthetic").style.display = "inline";
+						};
 
+						function evaluateAnswer(){
+							document.getElementById("humanvssynthetic").innerHTML = realvsfakestatusString;
+							document.getElementById("subtext").innerHTML = "click NEXT to try another!";
+							document.getElementById("Play").style.display = "none";
+							document.getElementById("GuessHuman").style.display = "none";
+							document.getElementById("GuessSynthetic").style.display = "none";
+							document.getElementById("Next").style.display = "inline";
+						}
 
+						function Reload(){
+							window.location.reload();
+						}
 
+						function getRndInteger(min, max) {
+  					return Math.floor(Math.random() * (max - min + 1) ) + min;
+					};
 
-
-						});
 
 						</script>
 						<footer>
 							<ul class="icons">
-								<button onClick='play();'>PLAY</button>
+								<button id="Play" onClick='play();'>PLAY</button>
 								<br/><br/>
-								<button id="GuessHuman">HUMAN</button> &nbsp &nbsp &nbsp
-								<button id="GuessSynthetic">SYNTHETIC</button>
+								<button id="GuessHuman" onClick='evaluateAnswer();' style="display:none">HUMAN</button> &nbsp &nbsp &nbsp
+								<button id="GuessSynthetic" onClick='evaluateAnswer();' style="display:none">FAKE</button>
 								<br/><br/>
-								<button id="Next">NEXT</button>
+								<button id="Next" onClick='Reload();' style="display:none">NEXT</button>
 								<!--<li><a href="#" class="icon brands fa-twitter">Twitterhhhh</a></li>
 								<li><a href="#" class="icon brands fa-instagram">Instagram</a></li>
 								<li><a href="#" class="icon brands fa-facebook-f">Facebook</a></li>--->
