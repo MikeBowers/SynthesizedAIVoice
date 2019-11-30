@@ -62,25 +62,35 @@
 						<hr />
 						-->
 
-						<script>
+						<script src="jquery-3.4.1.min.js">
+						$(document).ready(function(){
+							$("#Next").hide();
+							$("#GuessHuman").hide();
+							$("#GuessSynthetic").hide();
 
-						function play() {
-							var audio = new Audio('https://MikeBowers.Github.io/SynthesizedAIVoice/audio/Fake1.wav');
-							audio.play();
-							alert("FAKE!");
-						};
+							function play() {
+								var audio = new Audio('https://MikeBowers.Github.io/SynthesizedAIVoice/audio/Fake1.wav');
+								audio.play();
+
+								$("#GuessHuman").show();
+								$("#GuessSynthetic").show();
+							};
 
 
+
+
+
+						});
 
 						</script>
 						<footer>
 							<ul class="icons">
 								<button onClick='play();'>PLAY</button>
 								<br/><br/>
-								<button>HUMAN</button> &nbsp &nbsp &nbsp
-								<button>SYNTHETIC</button>
+								<button id="GuessHuman">HUMAN</button> &nbsp &nbsp &nbsp
+								<button id="GuessSynthetic">SYNTHETIC</button>
 								<br/><br/>
-								<button>NEXT</button>
+								<button id="Next">NEXT</button>
 								<!--<li><a href="#" class="icon brands fa-twitter">Twitterhhhh</a></li>
 								<li><a href="#" class="icon brands fa-instagram">Instagram</a></li>
 								<li><a href="#" class="icon brands fa-facebook-f">Facebook</a></li>--->
