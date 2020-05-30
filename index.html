@@ -68,6 +68,7 @@
 						var realvsfakestatusString = "";
 						var realvsfakeindexInt = getRndInteger(1,6);
 						var realvsfakeindexString;
+							
 						function play() {
 
 							if(realvsfakestatusInt == 1)//real = 0 fake = 1
@@ -87,9 +88,17 @@
 							document.getElementById("GuessSynthetic").style.display = "inline";
 						};
 
-						function evaluateAnswer(){
+						function evaluateAnswer(userGuess){
+							if(userGuess == realvsfakestatusString)
+							{
+								document.getElementById("subtext").innerHTML = "CORRECT - click NEXT to try another!";	
+							}
+							if(userGuess != realvsfakestatusString)
+							{
+								document.getElementById("subtext").innerHTML = "WRONG - click NEXT to try another!";	
+							}
+							
 							document.getElementById("humanvssynthetic").innerHTML = realvsfakestatusString;
-							document.getElementById("subtext").innerHTML = "click NEXT to try another!";
 							document.getElementById("Play").style.display = "none";
 							document.getElementById("GuessHuman").style.display = "none";
 							document.getElementById("GuessSynthetic").style.display = "none";
@@ -110,8 +119,8 @@
 							<ul class="icons">
 								<button id="Play" onClick='play();'>PLAY</button>
 								<br/><br/>
-								<button id="GuessHuman" onClick='evaluateAnswer();' style="display:none">HUMAN</button> &nbsp &nbsp &nbsp
-								<button id="GuessSynthetic" onClick='evaluateAnswer();' style="display:none">FAKE</button>
+								<button id="GuessHuman" onClick='evaluateAnswer(Real);' style="display:none">HUMAN</button> &nbsp &nbsp &nbsp
+								<button id="GuessSynthetic" onClick='evaluateAnswer(Fake);' style="display:none">FAKE</button>
 								<br/><br/>
 								<button id="Next" onClick='Reload();' style="display:none">NEXT</button>
 								<!--<li><a href="#" class="icon brands fa-twitter">Twitterhhhh</a></li>
